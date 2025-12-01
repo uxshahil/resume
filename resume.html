@@ -419,17 +419,27 @@
         margin: 0 !important;
         gap: 0 !important;
         background: white !important;
+        display: block !important;
       }
       .noise-overlay, .scanline, .accent-corner { display: none !important; }
+
+      .page-content-wrapper {
+        margin-top: 0 !important;
+        width: auto !important;
+        display: block !important;
+      }
 
       .page-wrapper {
         transform: none !important;
         margin: 0 !important;
         padding: 0 !important;
         gap: 0 !important;
+        display: block !important;
       }
 
       .a4-page {
+        width: 210mm !important;
+        height: 297mm !important;
         box-shadow: none !important;
         background: white !important;
         -webkit-print-color-adjust: exact;
@@ -437,6 +447,8 @@
         margin: 0 !important;
         padding: 0 !important;
         page-break-after: always;
+        display: grid !important;
+        grid-template-columns: 62mm 148mm !important;
       }
 
       .a4-page:last-child {
@@ -462,9 +474,16 @@
         background: #f5f5f5 !important;
         backdrop-filter: none !important;
         border-right: 1px solid #ddd !important;
+        padding: 4mm 3mm !important;
+      }
+
+      .main-content {
+        padding: 4mm 4mm !important;
       }
 
       .profile-photo {
+        width: 32mm !important;
+        height: 32mm !important;
         background-image: url('./profile-pic.jpeg') !important;
         background-size: cover !important;
         background-position: center !important;
@@ -475,30 +494,57 @@
       .section-title {
         color: #333 !important;
         border-bottom-color: #333 !important;
+        font-size: 9pt !important;
       }
 
-      .skill-category { color: #555 !important; }
-      .skill-list, .general-text, .qualification-item { color: #333 !important; }
+      .skill-category {
+        color: #555 !important;
+        font-size: 7.5pt !important;
+      }
+      .skill-list, .general-text, .qualification-item {
+        color: #333 !important;
+        font-size: 7.5pt !important;
+      }
       .skill-list li::before { color: #555 !important; }
-      .qualification-year { color: #555 !important; }
-      .contact-item { color: #333 !important; }
+      .qualification-year {
+        color: #555 !important;
+        font-size: 6pt !important;
+      }
+      .qualification-item {
+        font-size: 6.75pt !important;
+      }
+      .contact-item {
+        color: #333 !important;
+        font-size: 6.75pt !important;
+      }
       .contact-icon { color: #555 !important; }
 
       .tech-tag {
         background: #f0f0f0 !important;
         border-color: #999 !important;
         color: #333 !important;
+        font-size: 6pt !important;
       }
 
-      .glitch { color: #000 !important; }
+      .glitch {
+        color: #000 !important;
+        font-size: 24pt !important;
+      }
       .glitch::before, .glitch::after { display: none !important; }
 
-      .title-primary { color: #333 !important; }
-      .title-secondary { color: #555 !important; }
+      .title-primary {
+        color: #333 !important;
+        font-size: 10.5pt !important;
+      }
+      .title-secondary {
+        color: #555 !important;
+        font-size: 8.25pt !important;
+      }
 
       .career-header {
         color: #000 !important;
         border-bottom-color: #333 !important;
+        font-size: 13.5pt !important;
       }
 
       .career-entry {
@@ -506,20 +552,50 @@
         border: 1px solid #ddd !important;
         border-left: 2px solid #333 !important;
         backdrop-filter: none !important;
+        margin-bottom: 2mm !important;
+        padding: 1.5mm !important;
       }
 
-      .company-name { color: #000 !important; }
-      .meta-label { color: #666 !important; }
-      .meta-value { color: #000 !important; }
+      .company-name {
+        color: #000 !important;
+        font-size: 10.5pt !important;
+      }
+      .meta-label {
+        color: #666 !important;
+      }
+      .meta-value {
+        color: #000 !important;
+      }
       .meta-value.role { color: #333 !important; }
-      .career-description { color: #333 !important; }
+      .career-meta {
+        font-size: 7.5pt !important;
+      }
+      .career-description {
+        color: #333 !important;
+        font-size: 7.5pt !important;
+      }
       .career-description strong, .role-title-inline { color: #000 !important; }
-      .tech-list { color: #555 !important; }
-      .page-number { color: #666 !important; }
+      .tech-list {
+        color: #555 !important;
+        font-size: 6pt !important;
+      }
+      .page-number {
+        color: #666 !important;
+        font-size: 7.5pt !important;
+      }
 
-      .closing-tagline { color: #000 !important; }
-      .closing-divider { color: #333 !important; }
-      .closing-year { color: #333 !important; }
+      .closing-tagline {
+        color: #000 !important;
+        font-size: 12pt !important;
+      }
+      .closing-divider {
+        color: #333 !important;
+        font-size: 9pt !important;
+      }
+      .closing-year {
+        color: #333 !important;
+        font-size: 12pt !important;
+      }
       .closing-line { background: #333 !important; }
     }
 
