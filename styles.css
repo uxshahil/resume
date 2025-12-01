@@ -98,35 +98,23 @@ body.scrolled main {
 
 /* Typography & Hero */
 .hero {
-    /* Scroll-linked animation variables */
-    --scroll-progress: 0;
-    --min-padding: 0.8rem;
-    --max-padding: 6rem;
-    
-    /* Interpolate padding based on scroll progress */
-    padding: calc(var(--max-padding) - (var(--max-padding) - var(--min-padding)) * var(--scroll-progress)) 0;
-    
+    padding: 6rem 0 4rem;
     text-align: center;
     border-bottom: 1px solid var(--border-color);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    
-    /* Interpolate background opacity */
-    background: rgba(5, 5, 5, calc(0.2 + (0.78 * var(--scroll-progress))));
-    
+    background: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(5px);
     z-index: 1000;
-    
-    /* Remove transition for properties controlled by scroll to avoid lag */
-    transition: box-shadow 0.4s ease;
-    will-change: padding, background-color;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero.scrolled {
-    /* Fallback/Final state is handled by the variable reaching 1, 
-       but we keep the class for other toggles like text changes */
+    padding: 0.8rem 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -1056,28 +1044,18 @@ footer {
 }
 
 @media (max-width: 768px) {
-    /* Hero takes full viewport on mobile initially, then shrinks */
+    /* Hero takes full viewport on mobile */
     .hero {
-        --max-padding: 2rem;
-        --min-padding: 1rem;
-        
-        /* Interpolate min-height from 100vh to ~80px */
-        min-height: calc(100vh - (100vh - 80px) * var(--scroll-progress));
-        
-        /* Ensure padding uses the calc from the main rule (inherited) or re-declare if needed */
-        padding: calc(var(--max-padding) - (var(--max-padding) - var(--min-padding)) * var(--scroll-progress)) 0;
-        
+        min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        
-        /* Remove transition for scroll-linked props */
-        transition: box-shadow 0.4s ease;
-        will-change: min-height, padding;
+        padding: 2rem 0;
+        transition: min-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .hero.scrolled {
-        min-height: auto;
+        min-height: 80px;
         padding: 1rem 0;
         display: block;
     }
