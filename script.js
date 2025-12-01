@@ -13,8 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const currentScroll = window.scrollY;
                 
                 // Progressive Hero Minification
-                // Calculate progress (0 to 1) over the first 200px of scroll
-                const heroScrollRange = 200;
+                // Calculate progress (0 to 1) over the first 200px (desktop) or 400px (mobile) of scroll
+                // Increasing the range on mobile "slows down" the animation relative to scroll speed
+                const isMobile = window.innerWidth <= 768;
+                const heroScrollRange = isMobile ? 400 : 200;
                 const heroProgress = Math.min(currentScroll / heroScrollRange, 1);
                 
                 // Set CSS variable for scroll-linked animations
