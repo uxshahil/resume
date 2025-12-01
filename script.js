@@ -11,22 +11,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!ticking) {
             window.requestAnimationFrame(() => {
                 const currentScroll = window.scrollY;
-                
-                // Progressive Hero Minification
-                // Calculate progress (0 to 1) over the first 200px (desktop) or 400px (mobile) of scroll
-                // Increasing the range on mobile "slows down" the animation relative to scroll speed
                 const isMobile = window.innerWidth <= 768;
-                const heroScrollRange = isMobile ? 400 : 200;
-                const heroProgress = Math.min(currentScroll / heroScrollRange, 1);
-                
-                // Set CSS variable for scroll-linked animations
-                hero.style.setProperty('--scroll-progress', heroProgress);
 
-                if (currentScroll > 50) { // Lower threshold for class toggle
+                // Only use scroll-linked CSS variables on mobile
+                if (isMobile) {
+                    const heroScrollRange = 400;
+                    const heroProgress = Math.min(currentScroll / heroScrollRange, 1);
+                    hero.style.setProperty('--scroll-progress', heroProgress);
+                }
+
+                if (currentScroll > 100) {
                     hero.classList.add('scrolled');
                     glitchElement.setAttribute('data-text', 'SS');
                     document.body.classList.add('scrolled');
-                    
+
                     // Start counters after blur transition completes (400ms)
                     setTimeout(() => {
                         startCounterAnimations();
@@ -39,21 +37,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Exponential gap shrink/grow effect
                 // Only run on non-mobile devices to save performance
-                if (window.innerWidth > 768) {
+                if (!isMobile) {
                     // Gap shrinks as you scroll down, grows as you scroll up
                     const maxScroll = 500; // Max scroll distance for effect
                     const minGap = 0.5; // Minimum gap in rem
                     const maxGap = 1.5; // Maximum gap in rem
-                    
+
                     // Calculate progress (0 to 1) with exponential easing
                     const progress = Math.min(currentScroll / maxScroll, 1);
                     const exponentialProgress = 1 - Math.pow(1 - progress, 3); // Cubic ease out
-                    
+
                     // Calculate gap (inverted - shrinks as you scroll)
                     const gap = maxGap - (exponentialProgress * (maxGap - minGap));
                     summaryGrid.style.gap = `${gap}rem`;
                 }
-                
+
                 lastScroll = currentScroll;
                 ticking = false;
             });
