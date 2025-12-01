@@ -35,6 +35,11 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
     position: relative;
+    overscroll-behavior-y: none; /* Prevent elastic bounce on mobile */
+}
+
+html {
+    overscroll-behavior-y: none;
 }
 
 @media (max-width: 768px) {
