@@ -12,7 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
             window.requestAnimationFrame(() => {
                 const currentScroll = window.scrollY;
                 
-                if (currentScroll > 100) {
+                // Progressive Hero Minification
+                // Calculate progress (0 to 1) over the first 200px of scroll
+                const heroScrollRange = 200;
+                const heroProgress = Math.min(currentScroll / heroScrollRange, 1);
+                
+                // Set CSS variable for scroll-linked animations
+                hero.style.setProperty('--scroll-progress', heroProgress);
+
+                if (currentScroll > 50) { // Lower threshold for class toggle
                     hero.classList.add('scrolled');
                     glitchElement.setAttribute('data-text', 'SS');
                     document.body.classList.add('scrolled');
