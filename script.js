@@ -12,17 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
             window.requestAnimationFrame(() => {
                 const currentScroll = window.scrollY;
                 
-                // Progressive Hero Minification
-                // Calculate progress (0 to 1) over the first 200px (desktop) or 400px (mobile) of scroll
-                // Increasing the range on mobile "slows down" the animation relative to scroll speed
-                const isMobile = window.innerWidth <= 768;
-                const heroScrollRange = isMobile ? 400 : 200;
-                const heroProgress = Math.min(currentScroll / heroScrollRange, 1);
-                
-                // Set CSS variable for scroll-linked animations
-                hero.style.setProperty('--scroll-progress', heroProgress);
-
-                if (currentScroll > 50) { // Lower threshold for class toggle
+                // Scroll-Triggered Minification
+                // Simply toggle the class based on a small threshold
+                // This relies on CSS transitions for the smooth animation
+                if (currentScroll > 10) {
                     hero.classList.add('scrolled');
                     glitchElement.setAttribute('data-text', 'SS');
                     document.body.classList.add('scrolled');
