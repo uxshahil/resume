@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shahil Sukuram - Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Outfit:wght@100..900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #050505;
+      --card-bg: rgba(20, 20, 20, 0.4);
+      --text-primary: #ffffff;
+      --text-secondary: #e0e0e0;
+      --accent-cyan: #00f3ff;
+      --accent-yellow: #FFDA03;
+      --accent-lime: #ccff00;
+      --accent-blue: #0066ff;
+      --glow-cyan: 0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3);
+      --glow-yellow: 0 0 10px rgba(255, 218, 3, 0.5), 0 0 20px rgba(255, 218, 3, 0.3);
+      --border-color: rgba(255, 255, 255, 0.2);
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-body: 'Outfit', sans-serif;
+      --font-display: 'Syncopate', sans-serif;
+      --glass-border: 1px solid rgba(255, 255, 255, 0.18);
+      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg-color);
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .page-wrapper {
+      transform-origin: top center;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .noise-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .scanline {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: 9998;
+      animation: scanlineScroll 10s linear infinite;
+    }
+
+    @keyframes scanlineScroll {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+
+    @page { size: A4; margin: 0; }
+
+    .a4-page {
+      width: 210mm;
+      height: 297mm;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 62mm 148mm;
+      box-shadow: var(--glass-shadow);
+    }
+
+    .a4-page.closing-page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-right: var(--glass-border);
+      padding: 4mm 3mm;
+      display: flex;
+      flex-direction: column;
+      gap: 2mm;
+    }
+
+    .main-content {
+      padding: 4mm 4mm;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .profile-photo {
+      width: 32mm;
+      height: 32mm;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+      margin: 0 auto 2mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .profile-photo-inner {
+      width: 30mm;
+      height: 30mm;
+      border-radius: 50%;
+      background: #1a1a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 7.5pt;
+      color: var(--text-secondary);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 9pt;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 1mm;
+      padding-bottom: 0.5mm;
+      border-bottom: 1px solid var(--accent-cyan);
+    }
+
+    .sidebar-section { margin-bottom: 1.5mm; }
+
+    .skill-category {
+      font-size: 7.5pt;
+      font-weight: 600;
+      color: var(--accent-yellow);
+      margin-bottom: 0.3mm;
+    }
+
+    .skill-list {
+      list-style: none;
+      font-size: 7.5pt;
+      color: var(--text-secondary);
+      line-height: 1.3;
+    }
+
+    .skill-list li { padding-left: 1.5mm; position: relative; }
+    .skill-list li::before {
+      content: "▸";
+      color: var(--accent-cyan);
+      position: absolute;
+      left: 0;
+      font-size: 6pt;
+    }
+
+    .general-text {
+      font-size: 7.5pt;
+      color: var(--text-secondary);
+      line-height: 1.3;
+    }
+
+    .qualification-item {
+      font-size: 6.75pt;
+      color: var(--text-secondary);
+      margin-bottom: 0.5mm;
+      line-height: 1.2;
+    }
+
+    .qualification-year {
+      color: var(--accent-yellow);
+      font-family: var(--font-mono);
+      font-size: 6pt;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1mm;
+      font-size: 6.75pt;
+      color: var(--text-secondary);
+      margin-bottom: 0.5mm;
+    }
+
+    .contact-icon {
+      color: var(--accent-cyan);
+      font-size: 7.5pt;
+      width: 3mm;
+      text-align: center;
+    }
+
+    .contact-text { word-break: break-all; }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8mm;
+    }
+
+    .tech-tag {
+      background: rgba(0, 243, 255, 0.1);
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      font-size: 6pt;
+      padding: 0.4mm 1mm;
+      border-radius: 0.5mm;
+    }
+
+    .name-header { text-align: right; margin-bottom: 1mm; }
+
+    .glitch-wrapper { position: relative; }
+
+    .glitch {
+      font-family: var(--font-display);
+      font-size: 24pt;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 2px;
+      position: relative;
+      text-transform: uppercase;
+    }
+
+    .glitch::before, .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+
+    .glitch::before {
+      left: 2px;
+      text-shadow: -1px 0 var(--accent-yellow);
+      clip: rect(44px, 450px, 56px, 0);
+      animation: glitch-anim 5s infinite linear alternate-reverse;
+    }
+
+    .glitch::after {
+      left: -2px;
+      text-shadow: -1px 0 var(--accent-cyan);
+      clip: rect(44px, 450px, 56px, 0);
+      animation: glitch-anim2 5s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim {
+      0% { clip: rect(35px, 9999px, 11px, 0); }
+      20% { clip: rect(68px, 9999px, 96px, 0); }
+      40% { clip: rect(12px, 9999px, 59px, 0); }
+      60% { clip: rect(84px, 9999px, 2px, 0); }
+      80% { clip: rect(55px, 9999px, 36px, 0); }
+      100% { clip: rect(2px, 9999px, 88px, 0); }
+    }
+
+    @keyframes glitch-anim2 {
+      0% { clip: rect(15px, 9999px, 91px, 0); }
+      20% { clip: rect(48px, 9999px, 26px, 0); }
+      40% { clip: rect(92px, 9999px, 19px, 0); }
+      60% { clip: rect(4px, 9999px, 82px, 0); }
+      80% { clip: rect(25px, 9999px, 66px, 0); }
+      100% { clip: rect(72px, 9999px, 18px, 0); }
+    }
+
+    .title-primary {
+      font-size: 10.5pt;
+      color: var(--accent-cyan);
+      font-weight: 500;
+    }
+
+    .title-secondary {
+      font-size: 8.25pt;
+      color: var(--accent-yellow);
+      font-family: var(--font-mono);
+    }
+
+    .career-header {
+      font-family: var(--font-display);
+      font-size: 13.5pt;
+      color: var(--text-primary);
+      margin: 1.5mm 0 1mm;
+      padding-bottom: 0.8mm;
+      border-bottom: 2px solid var(--accent-yellow);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .career-entry {
+      margin-bottom: 2mm;
+      padding: 1.5mm;
+      background: var(--card-bg);
+      border: var(--glass-border);
+      border-radius: 1mm;
+      backdrop-filter: blur(5px);
+      border-left: 2px solid var(--accent-blue);
+    }
+
+    .company-name {
+      font-size: 10.5pt;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      text-decoration: underline;
+      margin-bottom: 0.3mm;
+    }
+
+    .career-meta {
+      display: grid;
+      grid-template-columns: 18mm 1fr;
+      gap: 0.2mm 1mm;
+      font-size: 7.5pt;
+      margin-bottom: 0.5mm;
+    }
+
+    .meta-label { color: var(--text-secondary); font-weight: 500; }
+    .meta-value { color: var(--text-primary); font-weight: 600; }
+    .meta-value.role { color: var(--accent-yellow); }
+
+    .career-description {
+      font-size: 7.5pt;
+      color: var(--text-secondary);
+      line-height: 1.35;
+      text-align: justify;
+    }
+
+    .career-description strong { color: var(--accent-lime); }
+
+    .tech-list {
+      margin-top: 0.5mm;
+      font-size: 6pt;
+      color: var(--accent-lime);
+      font-family: var(--font-mono);
+      line-height: 1.25;
+    }
+
+    .role-section { margin-top: 1mm; }
+    .role-title-inline {
+      font-weight: 700;
+      color: var(--accent-lime);
+    }
+
+    .page-number {
+      position: absolute;
+      bottom: 2mm;
+      right: 4mm;
+      font-family: var(--font-mono);
+      font-size: 7.5pt;
+      color: var(--text-secondary);
+    }
+
+    .accent-corner {
+      position: absolute;
+      width: 25mm;
+      height: 25mm;
+      border-radius: 50%;
+      filter: blur(20px);
+      opacity: 0.3;
+    }
+
+    .corner-top-right { top: -8mm; right: -8mm; background: var(--accent-yellow); }
+    .corner-bottom-left { bottom: -8mm; left: -8mm; background: var(--accent-cyan); }
+
+    /* Closing Page */
+    .closing-content {
+      text-align: center;
+    }
+
+    .closing-tagline {
+      font-family: var(--font-display);
+      font-size: 12pt;
+      color: var(--text-primary);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 8mm;
+    }
+
+    .closing-divider {
+      font-family: var(--font-mono);
+      font-size: 9pt;
+      color: var(--accent-yellow);
+      margin: 0 4mm;
+    }
+
+    .closing-year {
+      font-family: var(--font-mono);
+      font-size: 12pt;
+      color: var(--accent-lime);
+      letter-spacing: 3px;
+    }
+
+    .closing-line {
+      width: 80mm;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-cyan), var(--accent-yellow), transparent);
+      margin: 0 auto 8mm;
+    }
+
+    /* Print Styles */
+    @media print {
+      body { padding: 0; gap: 0; background: white !important; }
+      .noise-overlay, .scanline, .accent-corner { display: none !important; }
+      
+      .page-wrapper {
+        transform: none !important;
+        margin-bottom: 0 !important;
+        gap: 0 !important;
+      }
+
+      .a4-page {
+        page-break-after: always;
+        box-shadow: none !important;
+        background: white !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .sidebar {
+        background: #f5f5f5 !important;
+        backdrop-filter: none !important;
+        border-right: 1px solid #ddd !important;
+      }
+
+      .profile-photo { background: #333 !important; }
+
+      .section-title {
+        color: #333 !important;
+        border-bottom-color: #333 !important;
+      }
+
+      .skill-category { color: #555 !important; }
+      .skill-list, .general-text, .qualification-item { color: #333 !important; }
+      .skill-list li::before { color: #555 !important; }
+      .qualification-year { color: #555 !important; }
+      .contact-item { color: #333 !important; }
+      .contact-icon { color: #555 !important; }
+
+      .tech-tag {
+        background: #f0f0f0 !important;
+        border-color: #999 !important;
+        color: #333 !important;
+      }
+
+      .glitch { color: #000 !important; }
+      .glitch::before, .glitch::after { display: none !important; }
+
+      .title-primary { color: #333 !important; }
+      .title-secondary { color: #555 !important; }
+
+      .career-header {
+        color: #000 !important;
+        border-bottom-color: #333 !important;
+      }
+
+      .career-entry {
+        background: #fafafa !important;
+        border: 1px solid #ddd !important;
+        border-left: 2px solid #333 !important;
+        backdrop-filter: none !important;
+      }
+
+      .company-name { color: #000 !important; }
+      .meta-label { color: #666 !important; }
+      .meta-value { color: #000 !important; }
+      .meta-value.role { color: #333 !important; }
+      .career-description { color: #333 !important; }
+      .career-description strong, .role-title-inline { color: #000 !important; }
+      .tech-list { color: #555 !important; }
+      .page-number { color: #666 !important; }
+
+      .closing-tagline { color: #000 !important; }
+      .closing-divider { color: #333 !important; }
+      .closing-year { color: #333 !important; }
+      .closing-line { background: #333 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  <div class="scanline"></div>
+
+  <div class="page-wrapper">
+  <!-- Page 1 -->
+  <div class="a4-page">
+    <div class="accent-corner corner-top-right"></div>
+    <div class="accent-corner corner-bottom-left"></div>
+    
+    <aside class="sidebar">
+      <div class="profile-photo">
+        <div class="profile-photo-inner">PHOTO</div>
+      </div>
+
+      <div class="sidebar-section">
+        <h2 class="section-title">Skills</h2>
+        <p class="skill-category">Core Skills</p>
+        <ul class="skill-list">
+          <li>JavaScript, TypeScript</li>
+          <li>Vue, React</li>
+          <li>React Native Mobile App Development</li>
+          <li>Web App Development</li>
+          <li>C#</li>
+          <li>Rest API Integrations</li>
+          <li>SQL</li>
+          <li>Cloud Engineering</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h2 class="section-title">General</h2>
+        <p class="general-text">Full-stack JavaScript software engineer with 15 years experience in building information systems.</p>
+      </div>
+
+      <div class="sidebar-section">
+        <h2 class="section-title">Languages</h2>
+        <p class="general-text">English</p>
+      </div>
+
+      <div class="sidebar-section">
+        <h2 class="section-title">Qualifications</h2>
+        <div class="qualification-item"><span class="qualification-year">2015</span> - Awethu Project</div>
+        <div class="qualification-item"><span class="qualification-year">2015</span> - Start-Up Business Development Programme</div>
+        <div class="qualification-item"><span class="qualification-year">2013</span> - Effective Business Communication</div>
+        <div class="qualification-item"><span class="qualification-year">2012</span> - BSc (Hons) In Business Information Technology</div>
+        <div class="qualification-item"><span class="qualification-year">2009</span> - BTEC Higher National Diploma in IT</div>
+        <div class="qualification-item"><span class="qualification-year">2008</span> - Comprehensive Programming Diploma</div>
+        <div class="qualification-item"><span class="qualification-year">2006</span> - National Senior Certificate</div>
+      </div>
+
+      <div class="sidebar-section">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-item">
+          <span class="contact-icon">✉</span>
+          <span class="contact-text">shahil@themidastouch.co.za</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">☎</span>
+          <span class="contact-text">068 099 9064</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">⌘</span>
+          <span class="contact-text">linkedin.com/in/shahilsukuram</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">◈</span>
+          <span class="contact-text">github.com/uxshahil</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h2 class="section-title">Tech Stack</h2>
+        <div class="tech-tags">
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">Vue</span>
+          <span class="tech-tag">React Native</span>
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">AWS</span>
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">GraphQL</span>
+          <span class="tech-tag">REST API</span>
+          <span class="tech-tag">Redux</span>
+          <span class="tech-tag">Tailwind</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="name-header">
+        <div class="glitch-wrapper">
+          <h1 class="glitch" data-text="Shahil Sukuram">Shahil Sukuram</h1>
+        </div>
+        <p class="title-primary">Solutions Architect | Senior Full-Stack Engineer</p>
+        <p class="title-secondary">Cloud Infrastructure • Systems Stability • Full-Stack Development</p>
+      </header>
+
+      <h2 class="career-header">Career History</h2>
+
+      <article class="career-entry">
+        <h3 class="company-name">Infleet International</h3>
+        <div class="career-meta">
+          <span class="meta-label">Project role:</span>
+          <span class="meta-value role">Senior Full-Stack Engineer → Solutions Architect</span>
+          <span class="meta-label">Time period:</span>
+          <span class="meta-value">2024 - 2025</span>
+        </div>
+        <p class="career-description">Evolved from Senior Full-Stack Engineer to Solutions Architect. <strong>Platform Stabilization</strong> - Architected critical remediation programs eliminating system instability (achieving 99.99% uptime), reducing cloud costs by 13% (50% EC2 reduction) through architectural code optimizations, and accelerating deployment cadence to 5-10 releases/week. <strong>Multi-Tenancy Architecture</strong> - Designed custom database schema migration tooling enabling consolidation of fragmented multi-client architecture. <strong>Technical Governance</strong> - Primary technical authority leading remediation of 18 high-severity vulnerabilities and answering 85% of questions during AWS Well-Architected reviews.</p>
+      </article>
+
+      <article class="career-entry">
+        <h3 class="company-name">The Delta Studio</h3>
+        <div class="career-meta">
+          <span class="meta-label">Project role:</span>
+          <span class="meta-value role">Senior Software Engineer | FE</span>
+          <span class="meta-label">Time period:</span>
+          <span class="meta-value">May 2022 - Current</span>
+        </div>
+        <p class="career-description"><strong>Lora</strong> - Developed 4K responsive Dentist Booking web app using ReactJS, TypeScript, Redux Toolkit, Tailwind CSS. <strong>Wndrlst</strong> - Full HD responsive Web 3 NFT Gated DApp using VueJS, TypeScript, Pinia, Tailwind CSS, Twitter integration, PWA support. <strong>Zuzocard</strong> - Led solutions architecture and mobile app development of PCI DSS compliant banking solution for employee rewards via virtual debit card.</p>
+      </article>
+
+      <article class="career-entry">
+        <h3 class="company-name">The Midas Touch</h3>
+        <div class="career-meta">
+          <span class="meta-label">Project role:</span>
+          <span class="meta-value role">Information Systems Engineer</span>
+          <span class="meta-label">Time period:</span>
+          <span class="meta-value">October 2014 - Current</span>
+        </div>
+        <p class="career-description">Owner of company. Responsible for client acquisition, project planning, SQL database design & development, UI/UX Design, FE Development, REST API development, testing, hosted server environment setup, software maintenance, backups.</p>
+        <p class="tech-list">HTML5, CSS3, JS, REACT.JS, PHP, NODE.JS, REST API, GRAPHQL API, REACT NATIVE, AWS, UBUNTU, NGINX, APACHE, IOS, ANDROID, POSTGRES, GOOGLE CLOUD, FIRESTORE</p>
+      </article>
+
+      <article class="career-entry">
+        <h3 class="company-name">Tindale Group</h3>
+        <div class="career-meta">
+          <span class="meta-label">Project role:</span>
+          <span class="meta-value role">Mobile App Project Manager</span>
+          <span class="meta-label">Time period:</span>
+          <span class="meta-value">June 2016 - November 2016</span>
+        </div>
+        <p class="career-description">Delivered On Show App for iOS and Android. Drafted requirements specification based on patent app. Collaborated with patent-owner on business monetization. Reported to executive management on progress and resource needs.</p>
+      </article>
+
+      <article class="career-entry">
+        <h3 class="company-name">Real People Group & Aspire Education Group</h3>
+        <div class="career-meta">
+          <span class="meta-label">Project role:</span>
+          <span class="meta-value role">Jnr. → Intermediate → Contracting Business Analyst</span>
+          <span class="meta-label">Time period:</span>
+          <span class="meta-value">February 2011 - April 2014</span>
+        </div>
+        <p class="career-description"><span class="role-title-inline">Contracting BA</span> — Finalized Business Requirements & Functional Spec for two mission-critical systems. Performed UAT, facilitated training workshops and JAD sessions between East-London and Johannesburg offices.</p>
+        <p class="career-description" style="margin-top:0.8mm;"><span class="role-title-inline">Intermediate BA</span> — Documented organization business processes. Engineered processes for eCommerce website. Liaised with mobile app consultancy for educational Math game development.</p>
+        <p class="career-description" style="margin-top:0.8mm;"><span class="role-title-inline">Junior BA</span> — Determined requirements for organization-wide LMS. Conducted JAD sessions with 5 subsidiary companies. Re-engineered processes improving learner assessment turnaround from 55 to 22 days.</p>
+      </article>
+    </main>
+
+    <span class="page-number">1</span>
+  </div>
+
+  <!-- Page 2 - Closing -->
+  <div class="a4-page closing-page">
+    <div class="accent-corner corner-top-right"></div>
+    <div class="accent-corner corner-bottom-left"></div>
+    
+    <div class="closing-content">
+      <div class="closing-line"></div>
+      <span class="closing-tagline">Engineered for Excellence</span>
+      <span class="closing-divider">//</span>
+      <span class="closing-year">2025</span>
+      <div class="closing-line" style="margin-top: 8mm;"></div>
+    </div>
+
+    <span class="page-number">2</span>
+  </div>
+  </div>
+
+  <script>
+    function scalePages() {
+      const wrapper = document.querySelector('.page-wrapper');
+      const page = document.querySelector('.a4-page');
+      if (!wrapper || !page) return;
+      
+      const pageWidth = page.offsetWidth;
+      const targetWidth = window.innerWidth * 0.72;
+      const scale = targetWidth / pageWidth;
+      
+      wrapper.style.transform = `scale(${scale})`;
+      
+      const pages = document.querySelectorAll('.a4-page');
+      const totalHeight = Array.from(pages).reduce((sum, p) => sum + p.offsetHeight, 0);
+      const gap = 20 * (pages.length - 1);
+      wrapper.style.marginBottom = `${(totalHeight + gap) * (scale - 1)}px`;
+    }
+    
+    scalePages();
+    window.addEventListener('resize', scalePages);
+  </script>
+</body>
+</html>
