@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Outfit:wght@100..900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <!-- Preloader -->
@@ -53,7 +54,7 @@
                     </svg>
                     <span>shahil@themidastouch.co.za</span>
                 </a>
-                <a href="resume.html" target="_blank" class="hero-download-btn">
+                <a href="#" onclick="generateResumePDF(event); return false;" class="hero-download-btn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 21l-8-9h6v-12h4v12h6l-8 9zm9-1v2h-18v-2h-2v4h22v-4h-2z"/>
                     </svg>
@@ -264,11 +265,11 @@
                     </svg>
                     <span>068 099 9064</span>
                 </a>
-                <a href="resume.html" target="_blank" class="social-link" aria-label="View Resume">
+                <a href="#" onclick="generateResumePDF(event); return false;" class="social-link" aria-label="Download Resume PDF">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 21l-8-9h6v-12h4v12h6l-8 9zm9-1v2h-18v-2h-2v4h22v-4h-2z"/>
                     </svg>
-                    <span>View Resume</span>
+                    <span>Download Resume</span>
                 </a>
             </div>
             <p class="footer-text">ENGINEERED FOR EXCELLENCE // 2025</p>
