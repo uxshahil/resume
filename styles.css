@@ -567,6 +567,52 @@ body.scrolled main {
     backdrop-filter: blur(4px);
 }
 
+/* Mobile Overrides */
+@media (max-width: 768px) {
+    .mission-brief .target {
+        backdrop-filter: none;
+        background: rgba(204, 255, 0, 0.1);
+    }
+
+    /* Performance Optimizations: Disable backdrop-filter on mobile */
+    .hero, 
+    .hero.scrolled,
+    .card, 
+    .stat-box, 
+    .content-block,
+    .scroll-top-btn,
+    .tab-btn,
+    .social-link,
+    footer {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    /* Use more opaque backgrounds to compensate for lack of blur */
+    .hero.scrolled {
+        background: rgba(5, 5, 5, 0.98);
+    }
+
+    .card, .stat-box, .content-block {
+        background: rgba(25, 25, 25, 0.95);
+    }
+
+    .tab-btn {
+        background: rgba(20, 20, 20, 0.9);
+    }
+
+    .social-link {
+        background: rgba(20, 20, 20, 0.9);
+    }
+
+    footer {
+        background: rgba(5, 5, 5, 0.95);
+    }
+    
+    .scroll-top-btn {
+        background: rgba(0, 0, 0, 0.9);
+    }
+}
 /* Scroll Top Button */
 .scroll-top-btn {
     position: relative;
