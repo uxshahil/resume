@@ -35,17 +35,6 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
     position: relative;
-    overscroll-behavior-y: none; /* Prevent elastic bounce on mobile */
-}
-
-html {
-    overscroll-behavior-y: none;
-}
-
-@media (max-width: 768px) {
-    body {
-        background-attachment: scroll;
-    }
 }
 
 /* Retro Effects */
@@ -569,52 +558,6 @@ body.scrolled main {
     backdrop-filter: blur(4px);
 }
 
-/* Mobile Overrides */
-@media (max-width: 768px) {
-    .mission-brief .target {
-        backdrop-filter: none;
-        background: rgba(204, 255, 0, 0.1);
-    }
-
-    /* Performance Optimizations: Disable backdrop-filter on mobile */
-    .hero, 
-    .hero.scrolled,
-    .card, 
-    .stat-box, 
-    .content-block,
-    .scroll-top-btn,
-    .tab-btn,
-    .social-link,
-    footer {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-    }
-
-    /* Use more opaque backgrounds to compensate for lack of blur */
-    .hero.scrolled {
-        background: rgba(5, 5, 5, 0.98);
-    }
-
-    .card, .stat-box, .content-block {
-        background: rgba(25, 25, 25, 0.95);
-    }
-
-    .tab-btn {
-        background: rgba(20, 20, 20, 0.9);
-    }
-
-    .social-link {
-        background: rgba(20, 20, 20, 0.9);
-    }
-
-    footer {
-        background: rgba(5, 5, 5, 0.95);
-    }
-    
-    .scroll-top-btn {
-        background: rgba(0, 0, 0, 0.9);
-    }
-}
 /* Scroll Top Button */
 .scroll-top-btn {
     position: relative;
@@ -979,21 +922,15 @@ footer {
 }
 
 
-/* Mobile adjustments for preloader and layout */
-@media (max-width: 768px) {
+/* Mobile adjustments for preloader */
+@media (max-width: 480px) {
     .hex-spinner {
         width: 60px;
         height: 60px;
     }
     
     .loading-text {
-        font-size: 0.9rem;
-        text-align: center;
-    }
-    
-    .loading-text-wrapper {
-        flex-direction: column;
-        gap: 0.5rem;
+        font-size: 1rem;
     }
 
     .glitch {
@@ -1001,14 +938,8 @@ footer {
     }
     
     .summary-grid {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: 1fr;
         grid-template-rows: auto;
-        gap: 1.5rem;
-    }
-    
-    .highlight-card {
-        grid-column: 1 / -1;
-        grid-row: auto;
     }
     
     .highlight-card {
@@ -1040,29 +971,17 @@ footer {
     }
 }
 
-@media (max-width: 768px) {
-    /* Hero takes full viewport on mobile initially, then shrinks */
+@media (max-width: 480px) {
+    /* Hero takes full viewport on mobile */
     .hero {
-        /* Scroll-linked animation variables for mobile */
-        --scroll-progress: 0;
-        --max-padding: 2rem;
-        --min-padding: 1rem;
-
-        /* Interpolate min-height from 100vh to ~80px */
-        min-height: calc(100vh - (100vh - 80px) * var(--scroll-progress));
-
-        /* Interpolate padding based on scroll progress */
-        padding: calc(var(--max-padding) - (var(--max-padding) - var(--min-padding)) * var(--scroll-progress)) 0;
-
+        min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-
-        /* Remove transition for scroll-linked props on mobile */
-        transition: box-shadow 0.4s ease;
-        will-change: min-height, padding;
+        padding: 2rem 0;
+        transition: min-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
+    
     .hero.scrolled {
         min-height: auto;
         padding: 1rem 0;
@@ -1112,7 +1031,9 @@ footer {
     }
     
     .hero.scrolled .role-title {
-        display: none; /* Hide role title on mobile scroll to save space */
+        font-size: 0.65rem;
+        text-align: center;
+        line-height: 1.3;
     }
     
     .hero.scrolled .header-date {

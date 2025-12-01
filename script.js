@@ -5,59 +5,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const glitchElement = document.querySelector('.glitch');
     let lastScroll = 0;
 
-    let ticking = false;
-
     window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                const currentScroll = window.scrollY;
-                const isMobile = window.innerWidth <= 768;
-
-                // Only use scroll-linked CSS variables on mobile
-                if (isMobile) {
-                    const heroScrollRange = 400;
-                    const heroProgress = Math.min(currentScroll / heroScrollRange, 1);
-                    hero.style.setProperty('--scroll-progress', heroProgress);
-                }
-
-                if (currentScroll > 100) {
-                    hero.classList.add('scrolled');
-                    glitchElement.setAttribute('data-text', 'SS');
-                    document.body.classList.add('scrolled');
-
-                    // Start counters after blur transition completes (400ms)
-                    setTimeout(() => {
-                        startCounterAnimations();
-                    }, 400);
-                } else {
-                    hero.classList.remove('scrolled');
-                    glitchElement.setAttribute('data-text', 'SHAHIL SUKURAM');
-                    document.body.classList.remove('scrolled');
-                }
-
-                // Exponential gap shrink/grow effect
-                // Only run on non-mobile devices to save performance
-                if (!isMobile) {
-                    // Gap shrinks as you scroll down, grows as you scroll up
-                    const maxScroll = 500; // Max scroll distance for effect
-                    const minGap = 0.5; // Minimum gap in rem
-                    const maxGap = 1.5; // Maximum gap in rem
-
-                    // Calculate progress (0 to 1) with exponential easing
-                    const progress = Math.min(currentScroll / maxScroll, 1);
-                    const exponentialProgress = 1 - Math.pow(1 - progress, 3); // Cubic ease out
-
-                    // Calculate gap (inverted - shrinks as you scroll)
-                    const gap = maxGap - (exponentialProgress * (maxGap - minGap));
-                    summaryGrid.style.gap = `${gap}rem`;
-                }
-
-                lastScroll = currentScroll;
-                ticking = false;
-            });
-
-            ticking = true;
+        const currentScroll = window.scrollY;
+        
+        if (currentScroll > 100) {
+            hero.classList.add('scrolled');
+            glitchElement.setAttribute('data-text', 'SS');
+            document.body.classList.add('scrolled');
+            
+            // Start counters after blur transition completes (400ms)
+            setTimeout(() => {
+                startCounterAnimations();
+            }, 400);
+        } else {
+            hero.classList.remove('scrolled');
+            glitchElement.setAttribute('data-text', 'SHAHIL SUKURAM');
+            document.body.classList.remove('scrolled');
         }
+
+        // Exponential gap shrink/grow effect
+        // Gap shrinks as you scroll down, grows as you scroll up
+        const maxScroll = 500; // Max scroll distance for effect
+        const minGap = 0.5; // Minimum gap in rem
+        const maxGap = 1.5; // Maximum gap in rem
+        
+        // Calculate progress (0 to 1) with exponential easing
+        const progress = Math.min(currentScroll / maxScroll, 1);
+        const exponentialProgress = 1 - Math.pow(1 - progress, 3); // Cubic ease out
+        
+        // Calculate gap (inverted - shrinks as you scroll)
+        const gap = maxGap - (exponentialProgress * (maxGap - minGap));
+        summaryGrid.style.gap = `${gap}rem`;
+        
+        lastScroll = currentScroll;
     });
 
     const tabBtns = document.querySelectorAll('.tab-btn');
@@ -196,15 +176,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Format output
                 if (isFloat) {
-                    stat.textContent = currentValue.toFixed(2) + suffix;
+                    stat.innerText = currentValue.toFixed(2) + suffix;
                 } else {
-                    stat.textContent = Math.floor(currentValue) + suffix;
+                    stat.innerText = Math.floor(currentValue) + suffix;
                 }
                 
                 if (progress < 1) {
                     requestAnimationFrame(animate);
                 } else {
-                    stat.textContent = originalText;
+                    stat.innerText = originalText;
                 }
             }
             
